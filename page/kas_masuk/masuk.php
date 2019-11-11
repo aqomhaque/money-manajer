@@ -37,8 +37,10 @@
                                             <td><?php echo $data['keterangan']; ?></td>
                                             <td align="right"><?php echo"Rp. " .number_format($data['jumlah']).",- "; ?></td>
                                             <td>
-                                                <a href="">Edit</a>
-                                                <a href="">Hapus</a>
+                                                <a id="edit_data" data-toggle="modal" data-target="#edit" 
+                                                data-id="<?php echo $data['kode'] ?>" data-ket="<?php echo $data['keterangan']?>" data-tgl="<?php echo $data['tgl'] ?>" data-jml="<?php echo $data['jumlah']?>"class="btn btn-info"> <i class="fa fa-edit"></i>Edit</a>
+
+                                                <a class="btn btn-danger"> <i class="fa fa-trash"></i>Hapus</a>
                                             </td>
                                         </tr>
 
@@ -54,7 +56,8 @@
                                         </tr>
                                 </table>
                             </div>
-                            <!--  Modals-->
+
+                            <!-- PopUP Tambah Data -->
                                 <div class="panel-body">
                                     <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
                                       Tambah Data 
@@ -118,7 +121,68 @@
                                     }
 
                                  ?>
-                         <!-- End Modals-->
+                         <!-- Akhir PopUP Tambah Data-->
+
+                         <!-- Halaman Ubah Data-->
+                         <div class="panel-body">
+                                    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" id="modal_edit">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Form Edit Data</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form role="form" method="POST">
+                                                        <div class="form-group">
+                                                            <label>Kode</label>
+                                                            <input class="form-control" name="kode" placeholder="Masukkan Kode" id="kode" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Keterangan</label>
+                                                            <textarea class="form-control" rows="3" name="ket" id="ket"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Tanggal</label>
+                                                            <input class="form-control" type="date" name="tgl" placeholder="Pilih Tanggal" id="tgl" />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Jumlah</label>
+                                                            <input class="form-control" type="number" name="jml" placeholder="Masukkan Nominal" id="jml" />
+                                                        </div>
+
+                                                        <p class="help-block">Perhatikan! Edit dengan teliti!</p>
+                                                   
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                    <input type="submit" name="simpan" value="Simpan" class=" btn btn-primary">
+                                                </div>
+                                                    
+                                                </div>
+                                                </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Script Tambahan-->
+                                <script src="assets/js/jquery-1.10.2.js"></script>
+                                <script type="text/javascript">
+                                $(document).on("click","#edit_data",function()){
+                                
+                                    var kode = $(this).data('id');
+                                    var ket = $(this).data('ket');
+                                    var tgl = $(this).data('tgl');
+                                    var jml = $(this).data('jml');
+
+                                    $("#modal_edit #kode").val(kode);
+                                })
+
+                                </script>
+                                
+
+                         <!-- Akhir Halaman Ubah Data-->
+
+
                         </div>
                     </div>
                 </div>
