@@ -79,7 +79,9 @@ font-size: 16px;"> Diakses Pada : <?php echo date('d / M / y'); ?> &nbsp; <a hre
                     		if ($page == "masuk") {
                     			if ($aksi == "") {
                     				include "page/kas_masuk/masuk.php";
-                    			}
+                    			}if ($aksi == "hapus") {
+                                    include "page/kas_masuk/hapus.php";
+                                }
                     		}elseif ($page == "keluar") {
                     			if ($aksi == "") {
                     				include "page/kas_keluar/keluar.php";

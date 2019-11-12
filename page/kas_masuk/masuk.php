@@ -44,7 +44,7 @@
                                                 data-jml="<?php echo $data['jumlah']?>"
                                                 class="btn btn-info"> <i class="fa fa-edit"></i>Edit</a>
 
-                                                <a class="btn btn-danger"> <i class="fa fa-trash"></i>Hapus</a>
+                                                <a onclick="return confirm('Apakah anda yakin akan menghapus data ini????')" href="?page=masuk&aksi=hapus&id=<?php echo $data['kode'];?>" class="btn btn-danger"> <i class="fa fa-trash"></i>Hapus</a>
                                             </td>
                                         </tr>
 
@@ -165,7 +165,7 @@
                                                     
                                                 </div>
                                                 </form>
-
+                                                <!-- Script PHP untuk Ubah / Update Data -->
                                                     <?php 
                                                         if (isset($_POST['ubah'])) {
                                                             
@@ -186,10 +186,11 @@
                                                         }
 
                                                      ?>
+                                                     <!-- Akhir Script PHP untuk Ubah / Update Data -->
                                         </div>
                                     </div>
                                 </div>
-                                <!--Script Tambahan-->
+                                <!--Script Tambahan .js-->
                                 <script src="assets/js/jquery-1.10.2.js"></script>
                                 <script type="text/javascript">
                                 $(document).on("click","#edit_data",function(){
