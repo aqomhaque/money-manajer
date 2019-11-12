@@ -38,7 +38,11 @@
                                             <td align="right"><?php echo"Rp. " .number_format($data['jumlah']).",- "; ?></td>
                                             <td>
                                                 <a id="edit_data" data-toggle="modal" data-target="#edit" 
-                                                data-id="<?php echo $data['kode'] ?>" data-ket="<?php echo $data['keterangan']?>" data-tgl="<?php echo $data['tgl'] ?>" data-jml="<?php echo $data['jumlah']?>"class="btn btn-info"> <i class="fa fa-edit"></i>Edit</a>
+                                                data-id="<?php echo $data['kode'] ?>" 
+                                                data-ket="<?php echo $data['keterangan']?>" 
+                                                data-tgl="<?php echo $data['tgl'] ?>" 
+                                                data-jml="<?php echo $data['jumlah']?>"
+                                                class="btn btn-info"> <i class="fa fa-edit"></i>Edit</a>
 
                                                 <a class="btn btn-danger"> <i class="fa fa-trash"></i>Hapus</a>
                                             </td>
@@ -132,11 +136,11 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                     <h4 class="modal-title" id="myModalLabel">Form Edit Data</h4>
                                                 </div>
-                                                <div class="modal-body">
+                                                <div class="modal-body" id="modal_edit">
                                                     <form role="form" method="POST">
                                                         <div class="form-group">
                                                             <label>Kode</label>
-                                                            <input class="form-control" name="kode" placeholder="Masukkan Kode" id="kode" />
+                                                            <input class="form-control" name="kode" placeholder="Masukkan Kode" id="kode" readonly />
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Keterangan</label>
@@ -156,18 +160,39 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                                    <input type="submit" name="simpan" value="Simpan" class=" btn btn-primary">
+                                                    <input type="submit" name="ubah" value="Ubah" class=" btn btn-primary">
                                                 </div>
                                                     
                                                 </div>
                                                 </form>
+
+                                                    <?php 
+                                                        if (isset($_POST['ubah'])) {
+                                                            
+                                                            $kode = $_POST['kode'];
+                                                            $ket = $_POST['ket'];
+                                                            $tgl = $_POST['tgl'];
+                                                            $jml = $_POST['jml'];
+                                                            
+                                                            $sql = $koneksi->query("update tbl_kas set keterangan = '$ket', tgl = '$tgl', jumlah = '$jml', jenis= 'masuk', keluar = 0 where kode = '$kode'");
+                                                             if ($sql) {
+                                                                ?>
+                                                                    <script type="text/javascript">
+                                                                        alert("Ubah Data Berhasil!");
+                                                                        window.location.href="?page=masuk";
+                                                                    </script>
+                                                                <?php
+                                                            }
+                                                        }
+
+                                                     ?>
                                         </div>
                                     </div>
                                 </div>
                                 <!--Script Tambahan-->
                                 <script src="assets/js/jquery-1.10.2.js"></script>
                                 <script type="text/javascript">
-                                $(document).on("click","#edit_data",function()){
+                                $(document).on("click","#edit_data",function(){
                                 
                                     var kode = $(this).data('id');
                                     var ket = $(this).data('ket');
@@ -175,9 +200,13 @@
                                     var jml = $(this).data('jml');
 
                                     $("#modal_edit #kode").val(kode);
+                                    $("#modal_edit #ket").val(ket);
+                                    $("#modal_edit #tgl").val(tgl);
+                                    $("#modal_edit #jml").val(jml);
                                 })
 
                                 </script>
+                                
                                 
 
                          <!-- Akhir Halaman Ubah Data-->
